@@ -23,8 +23,8 @@ def parse_log(filename):
     redis_db = redis.StrictRedis(host="localhost", port=6379, db=0)
     pipe = redis_db.pipeline()
     with open(filename, 'r') as filename:
-        for i in range(0, 1000000+1):
-            serialize(filename.readline().replace('"', '').replace('[', '').replace(']', '').split(), pipe)
+        for string in filename:
+            serialize(string.replace('"', '').replace('[', '').replace(']', '').split(), pipe)
     pipe.execute()
 
 
