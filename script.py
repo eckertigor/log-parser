@@ -1,23 +1,7 @@
 from optparse import OptionParser
 import redis
-import time
 
 
-def timeit(method):
-
-    def timed(*args, **kw):
-        ts = time.time()
-        result = method(*args, **kw)
-        te = time.time()
-
-        print('%r (%r, %r) %2.2f sec' % \
-              (method.__name__, args, kw, te-ts))
-        # return result
-
-    return timed
-
-
-@timeit
 def main():
     parser = OptionParser()
     parser.add_option("-f", "--file", dest="filename",
@@ -72,8 +56,6 @@ def datetime_format(datetime_str):
                        'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'}
     format_str = format_str[5:9] + month_to_digit[format_str[2:5]] + format_str[0:2] + format_str[9:15]
     return int(format_str)
-
-
 
 
 main()
